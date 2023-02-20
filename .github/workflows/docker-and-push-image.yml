@@ -14,6 +14,9 @@ jobs:
       TAG_NUMBER: $GITHUB_RUN_NUMBER
     steps:
     - uses: actions/checkout@v3
+    - uses: docker/setup-qemu-action@v2
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v4.0.0
     - name: Get tag
       id: tag
       uses: dawidd6/action-get-tag@v1
