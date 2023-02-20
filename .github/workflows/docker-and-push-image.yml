@@ -37,5 +37,5 @@ jobs:
         builder: ${{ steps.buildx.outputs.name }}
         push: true
         tags: |
-          ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.buildx.outputs.name }}:latest
-          ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.buildx.outputs.name }}:${{steps.tag.outputs.tag}}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest
+          ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:${{steps.tag.outputs.tag}}
