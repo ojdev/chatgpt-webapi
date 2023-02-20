@@ -18,8 +18,7 @@ def chat(prompt,conversation_id=None,parent_id=None):
   for data in chatbot.ask(
     prompt,
     conversation_id = conversation_id,
-    parent_id = parent_id,
-    gen_title = True
+    parent_id = parent_id
   ):
     parent_id = data["parent_id"]
     conversation_id = data["conversation_id"]
