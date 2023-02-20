@@ -56,7 +56,7 @@ def delete_conversation(convo_id):
     resu = {'code': 0, 'msg': '删除成功: ' }
     return json.dumps(resu, ensure_ascii=False)
   
-@app.route('/conversation/<uuid:convo_id>', methods=['post'])
+@app.route('/conversation/<uuid:convo_id>', methods=['get'])
 def get_msg_history(convo_id):
     data = chatbot.get_msg_history(convo_id)
     return data
