@@ -29,8 +29,7 @@ jobs:
           network=host
           image=${{ inputs.buildkit-image || env.BUILDKIT_IMAGE }}
     - name: Build and push
-      id: docker_build
-      uses: ./
+      uses: docker/build-push-action@v4.0.0
       with:
         context: ./
         file: ./dockerfile
