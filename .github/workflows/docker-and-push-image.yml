@@ -15,7 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: docker/build-push-action@v4.0.0
-    - uses: dawidd6/action-get-tag@v1
+    - name: Get tag
+      id: tag
+      uses: dawidd6/action-get-tag@v1
       with:
         # Optionally strip `v` prefix
         strip_v: true
@@ -25,6 +27,4 @@ jobs:
         file: ./dockerfile
         platforms: linux/amd64
         push: true
-        tags: |
-          ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest
-          ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:${{steps.tag.outputs.tag}}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest,${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:${{steps.tag.outputs.tag}}
