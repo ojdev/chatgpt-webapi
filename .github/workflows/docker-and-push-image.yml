@@ -30,7 +30,7 @@ jobs:
           image=${{ inputs.buildkit-image || env.BUILDKIT_IMAGE }}
     - name: Build and push
       id: docker_build
-      uses: ./action
+      uses: ./
       with:
         context: ./
         file: ./dockerfile
