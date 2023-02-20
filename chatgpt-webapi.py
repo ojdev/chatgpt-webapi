@@ -9,16 +9,16 @@ config={
   "access_token": access_token
 }
 
-print(config)
 # 创建一个服务，把当前这个python文件当做一个服务
-server = flask.Flask(__name__)
+app = flask.Flask(__name__)
 chatbot = Chatbot(config)
 def chat(prompt,conversation_id=None,parent_id=None):
   message = ""
   for data in chatbot.ask(
     prompt,
     conversation_id = conversation_id,
-    parent_id = parent_id
+    parent_id = parent_id,
+    gen_title = True
   ):
     parent_id = data["parent_id"]
     conversation_id = data["conversation_id"]
@@ -29,7 +29,7 @@ def chat(prompt,conversation_id=None,parent_id=None):
     "conversation_id": conversation_id
   }
   return response
-@server.route('/ask', methods=['post'])
+@app.route('/ask', methods=['post'])
 def chatapi():
     requestJson = request.get_data()
     if requestJson is None or requestJson == "" or requestJson == {}:
@@ -50,10 +50,11 @@ def chatapi():
         resu = {'code': 0, 'data': msg}
         return json.dumps(resu, ensure_ascii=False)
 
-@server.route('/conversation/<uuid:convo_id>/delete', methods=['post'])
+@app.route('/conversation/<uuid:convo_id>/delete', methods=['post'])
 def delete_conversation(convo_id):
     chatbot.delete_conversation(convo_id)
     resu = {'code': 0, 'msg': '删除成功: ' }
     return json.dumps(resu, ensure_ascii=False)
 if __name__ == '__main__':
-    server.run(port=80, host='0.0.0.0')
+    server = pywsgi.WSGIServer(('0.0.0.0', 80), app)
+    server.serve_forever()
