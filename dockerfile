@@ -1,8 +1,8 @@
 FROM python:latest
 
-ENV access_token=""
+ENV access_token=
 
-RUN pip install --upgrade pip && pip install flask && pip3 install revChatGPT
+RUN pip install --upgrade pip && pip install flask revChatGPT
 
 WORKDIR /app
 
