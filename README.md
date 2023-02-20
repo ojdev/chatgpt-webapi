@@ -4,6 +4,9 @@
 ## 编译
 
 ### 直接运行
+
+安装依赖`get_msg_history`
+
 修改 chatgpt-webapi.py 中的`access_token =` 值为[https://chat.openai.com/api/auth/session](https://chat.openai.com/api/auth/session)获取到access_token，
 
 **注意：[acheong08/ChatGPT](https://github.com/acheong08/ChatGPT)包中使用用户名密码登录会有status code错误，原因未知。所以采用access_token，目前发现已经3天了，还没有过期。
