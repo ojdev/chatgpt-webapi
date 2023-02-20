@@ -40,7 +40,6 @@ jobs:
         context: ./
         file: ./dockerfile
         platforms: linux/amd64,linux/arm64
-        builder: ${{ steps.buildx.outputs.name }}
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest
