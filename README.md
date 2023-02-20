@@ -113,6 +113,13 @@ server {
 }
 ```
 
+
+### 获取历史记录 [GET] https://域名/conversation/{conversation_id}
+
+- conversation_id 首次对话返回的conversation_id
+
+```
+
 ### 后续扩展
 
 参考 [https://github.com/acheong08/ChatGPT/wiki/V1](https://github.com/acheong08/ChatGPT/wiki/V1)自行添加
