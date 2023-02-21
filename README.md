@@ -5,7 +5,7 @@
 
 ### 直接运行
 
-安装依赖`get_msg_history`
+安装依赖`pip install --upgrade pip && pip install flask gevent revChatGPT`
 
 修改 chatgpt-webapi.py 中的`access_token =` 值为[https://chat.openai.com/api/auth/session](https://chat.openai.com/api/auth/session)获取到access_token，
 
