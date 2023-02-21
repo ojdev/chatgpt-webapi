@@ -29,7 +29,6 @@ def chat(prompt,conversation_id=None,parent_id=None):
     "conversation_id": conversation_id
   }
   return response
-# 聊天对话
 @app.route('/ask', methods=['post'])
 def chatapi():
     requestJson = request.get_data()
@@ -50,18 +49,18 @@ def chatapi():
     else:
         resu = {'code': 0, 'data': msg}
         return json.dumps(resu, ensure_ascii=False)
-# 删除对话
+
 @app.route('/conversation/<uuid:convo_id>/delete', methods=['post'])
 def delete_conversation(convo_id):
     chatbot.delete_conversation(convo_id)
     resu = {'code': 0, 'msg': '删除成功: ' }
     return json.dumps(resu, ensure_ascii=False)
-# 拉取对话历史
+  
 @app.route('/conversation/<uuid:convo_id>', methods=['get'])
 def get_msg_history(convo_id):
     data = chatbot.get_msg_history(convo_id)
     return data
-
+  
 if __name__ == '__main__':
     server = pywsgi.WSGIServer(('0.0.0.0', 80), app)
     server.serve_forever()
