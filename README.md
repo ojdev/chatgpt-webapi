@@ -116,7 +116,7 @@ server {
 - conversation_id 首次对话返回的conversation_id
 
 
-### 修改会话标题 [GET] https://域名/conversation/{conversation_id}/title
+### 修改会话标题 [POST] https://域名/conversation/{conversation_id}/title
 
 - conversation_id 首次对话返回的conversation_id
 
