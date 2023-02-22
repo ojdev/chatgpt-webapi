@@ -108,6 +108,24 @@ server {
     "msg": "你的名字"
 }
 ```
+### 获取所有会话 [GET] https://域名/conversations
+
+
+### 获取历史记录 [GET] https://域名/conversation/{conversation_id}
+
+- conversation_id 首次对话返回的conversation_id
+
+
+### 修改会话标题 [GET] https://域名/conversation/{conversation_id}/title
+
+- conversation_id 首次对话返回的conversation_id
+
+#### PostBody
+```json
+{
+    "title": "新标题"
+}
+```
 
 ### 删除对话 [POST] https://域名/conversation/{conversation_id}/delete
 
@@ -118,12 +136,6 @@ server {
 {
 }
 ```
-
-
-### 获取历史记录 [GET] https://域名/conversation/{conversation_id}
-
-- conversation_id 首次对话返回的conversation_id
-
 
 ### 后续扩展
 
