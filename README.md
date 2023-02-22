@@ -9,7 +9,7 @@
 
 修改 chatgpt-webapi.py 中的`access_token =` 值为[https://chat.openai.com/api/auth/session](https://chat.openai.com/api/auth/session)获取到access_token，
 
-> 注意：[acheong08/ChatGPT](https://github.com/acheong08/ChatGPT)包中使用用户名密码登录会有status code错误，原因未知。所以采用access_token，目前发现已经4天了，还没有过期。 
+> 注意：[acheong08/ChatGPT](https://github.com/acheong08/ChatGPT)包中使用用户名密码登录会有status code错误，原因未知。所以采用access_token，目前发现已经5天了，还没有过期。 
 
 保存后直接使用 `python3 chatgpt-webapi.py` 运行,默认端口80
 
@@ -53,7 +53,13 @@ server {
     listen 443 ssl; 
 
     ssl_certificate /etc/letsencrypt/live/域名/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/域名/privkey.pem; 
+    ssl_certificate_key /etc/letsencrypt/live/域名/privkey.pem;
+    keepalive_timeout  300; 
+    tcp_nodelay on;
+    client_header_timeout 300;
+    client_body_timeout 300;
+    send_timeout 300;
+    proxy_read_timeout 300;
     error_page 497  https://$host$request_uri;
     location / {
         proxy_pass       http://chatgpt-webapi;
