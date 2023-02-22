@@ -29,6 +29,8 @@ def chat(prompt,conversation_id=None,parent_id=None):
     "conversation_id": conversation_id
   }
   return response
+
+# 对话
 @app.route('/ask', methods=['post'])
 def chatapi():
     requestJson = request.get_data()
@@ -50,17 +52,31 @@ def chatapi():
         resu = {'code': 0, 'data': msg}
         return json.dumps(resu, ensure_ascii=False)
 
+# 由于逆向工程的接口原因，参数传递都是正确的，但是始终返回的都是所有对话
+@app.route('/conversations', methods=['get'])
+def get_conversations():
+    resu = chatbot.get_conversations(offset=0, limit=100)
+    return resu
+  
+# 获取历史对话
+@app.route('/conversation/<uuid:convo_id>', methods=['get'])
+def get_msg_history(convo_id):
+    resu = chatbot.get_msg_history(convo_id)
+    return resu
+  
+# 修改对话标题
+@app.route('/conversation/<uuid:convo_id>/title', methods=['post'])
+def change_title(convo_id):
+    requestJson = request.get_data()
+    chatbot.change_title(convo_id,data['title'])   
+    return json.dumps({'code': 0, 'msg': '成功: ' }, ensure_ascii=False)
+  
+# 删除对话
 @app.route('/conversation/<uuid:convo_id>/delete', methods=['post'])
 def delete_conversation(convo_id):
     chatbot.delete_conversation(convo_id)
-    resu = {'code': 0, 'msg': '删除成功: ' }
-    return json.dumps(resu, ensure_ascii=False)
-  
-@app.route('/conversation/<uuid:convo_id>', methods=['get'])
-def get_msg_history(convo_id):
-    data = chatbot.get_msg_history(convo_id)
-    return data
-  
+    return json.dumps({'code': 0, 'msg': '成功: ' }, ensure_ascii=False)
+
 if __name__ == '__main__':
     server = pywsgi.WSGIServer(('0.0.0.0', 80), app)
     server.serve_forever()
