@@ -1,3 +1,5 @@
+[![Docker Image CI to Docker Hub](https://github.com/ojdev/chatgpt-webapi/actions/workflows/docker-and-push-image.yml/badge.svg)](https://github.com/ojdev/chatgpt-webapi/actions/workflows/docker-and-push-image.yml)
+
 # chatgpt-webapi
 使用[acheong08/ChatGPT](https://github.com/acheong08/ChatGPT)进行二次开发webapi接口
 
