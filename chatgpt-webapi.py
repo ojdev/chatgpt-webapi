@@ -15,6 +15,8 @@ app = flask.Flask(__name__)
 chatbot = Chatbot(config)
 def chat(prompt,conversation_id=None,parent_id=None):
   message = ""
+  if conversation_id is None and parent_id is None:
+    chatbot.reset_chat()
   for data in chatbot.ask(
     prompt,
     conversation_id = conversation_id,
