@@ -68,7 +68,8 @@ def get_msg_history(convo_id):
 @app.route('/conversation/<uuid:convo_id>/title', methods=['post'])
 def change_title(convo_id):
     requestJson = request.get_data()
-    chatbot.change_title(convo_id,data['title'])   
+    data = json.loads(requestJson)
+    chatbot.change_title(convo_id, data['title'])   
     return json.dumps({'code': 0, 'msg': '成功: ' }, ensure_ascii=False)
   
 # 删除对话
