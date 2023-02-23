@@ -1,4 +1,7 @@
 [![Docker Image CI to Docker Hub](https://github.com/ojdev/chatgpt-webapi/actions/workflows/docker-and-push-image.yml/badge.svg)](https://github.com/ojdev/chatgpt-webapi/actions/workflows/docker-and-push-image.yml)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/luacloud/chatgpt-webapi)](https://hub.docker.com/repository/docker/luacloud/chatgpt-webapi/general)
+[![Docker Image Size](https://img.shields.io/docker/image-size/luacloud/chatgpt-webapi/latest)](https://hub.docker.com/repository/docker/luacloud/chatgpt-webapi/general)
+[![Docker Pulls](https://img.shields.io/docker/pulls/luacloud/chatgpt-webapi)](https://hub.docker.com/repository/docker/luacloud/chatgpt-webapi/general)
 
 # chatgpt-webapi
 使用[acheong08/ChatGPT](https://github.com/acheong08/ChatGPT)进行二次开发webapi接口
