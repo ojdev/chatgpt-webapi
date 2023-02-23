@@ -32,4 +32,4 @@ jobs:
         file: ./dockerfile
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest,${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:${{steps.tag.outputs.tag}}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:${{steps.tag.outputs.tag}},${{ secrets.DOCKER_HUB_USERNAME }}/chatgpt-webapi:latest
