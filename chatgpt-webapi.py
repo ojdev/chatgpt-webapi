@@ -43,7 +43,7 @@ def chatapi():
     if ( 'parent_id' in data) == False:
       data['parent_id']=None
     try:
-        msg = chat(data['msg'])
+        msg = chat(data['msg'], data['conversation_id'], data['parent_id'])
     except Exception as error:
         print("接口报错")
         resu = {'code': 1, 'msg': '请求异常: ' + str(error)}
