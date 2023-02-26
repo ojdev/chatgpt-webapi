@@ -40,31 +40,27 @@ def chatapi():
         resu = {'code': 1, 'msg': '请求内容不能为空'}
         return json.dumps(resu, ensure_ascii=False)
     data = json.loads(requestJson)
-    if ( 'conversation_id' in data) == False:
-      data['conversation_id']=None
-    if ( 'parent_id' in data) == False:
-      data['parent_id']=None
+    if ('conversation_id' in data) == False:
+        data['conversation_id']=None
+    if ('parent_id' in data) == False:
+        data['parent_id'] = None
     try:
         msg = chat(data['msg'], data['conversation_id'], data['parent_id'])
     except Exception as error:
         print("接口报错")
-        resu = {'code': 1, 'msg': '请求异常: ' + str(error)}
-        return json.dumps(resu, ensure_ascii=False)
+        return json.dumps({'code': 1, 'msg': '请求异常: ' + str(error)}, ensure_ascii=False)
     else:
-        resu = {'code': 0, 'data': msg}
-        return json.dumps(resu, ensure_ascii=False)
+        return json.dumps({'code': 0, 'data': msg}, ensure_ascii=False)
 
 # 由于逆向工程的接口原因，参数传递都是正确的，但是始终返回的都是所有对话
 @app.route('/conversations', methods=['get'])
 def get_conversations():
-    resu = chatbot.get_conversations(offset=0, limit=100, encoding = 'utf-8')
-    return resu
+    return json.dumps(chatbot.get_conversations(offset=0, limit=100, encoding='utf-8'), ensure_ascii=False)
   
 # 获取历史对话
 @app.route('/conversation/<uuid:convo_id>', methods=['get'])
 def get_msg_history(convo_id):
-    resu = chatbot.get_msg_history(convo_id, encoding = 'utf-8')
-    return resu
+    return json.dumps(chatbot.get_msg_history(convo_id, encoding='utf-8'), ensure_ascii=False)
   
 # 修改对话标题
 @app.route('/conversation/<uuid:convo_id>/title', methods=['post'])
