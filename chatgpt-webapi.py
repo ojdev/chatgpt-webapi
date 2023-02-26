@@ -57,13 +57,13 @@ def chatapi():
 # 由于逆向工程的接口原因，参数传递都是正确的，但是始终返回的都是所有对话
 @app.route('/conversations', methods=['get'])
 def get_conversations():
-    resu = chatbot.get_conversations(offset=0, limit=100)
+    resu = chatbot.get_conversations(offset=0, limit=100, encoding = 'utf-8')
     return resu
   
 # 获取历史对话
 @app.route('/conversation/<uuid:convo_id>', methods=['get'])
 def get_msg_history(convo_id):
-    resu = chatbot.get_msg_history(convo_id)
+    resu = chatbot.get_msg_history(convo_id, encoding = 'utf-8')
     return resu
   
 # 修改对话标题
