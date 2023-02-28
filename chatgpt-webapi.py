@@ -40,11 +40,13 @@ def chatapi():
         resu = {'code': 1, 'msg': '请求内容不能为空'}
         return json.dumps(resu, ensure_ascii=False)
     data = json.loads(requestJson)
+    print(data)
     if ('conversation_id' in data) == False:
         data['conversation_id']=None
     if ('parent_id' in data) == False:
         data['parent_id'] = None
     try:
+        print(data)
         msg = chat(data['msg'], data['conversation_id'], data['parent_id'])
     except Exception as error:
         print("接口报错")
