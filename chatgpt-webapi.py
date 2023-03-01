@@ -13,24 +13,6 @@ config={
 # 创建一个服务，把当前这个python文件当做一个服务
 app = flask.Flask(__name__)
 chatbot = Chatbot(config)
-def chat(prompt,conversation_id=None,parent_id=None):
-  message = ""
-  if conversation_id is None and parent_id is None:
-    chatbot.reset_chat()
-  for data in chatbot.ask(
-    prompt,
-    conversation_id = conversation_id,
-    parent_id = parent_id
-  ):
-    parent_id = data["parent_id"]
-    conversation_id = data["conversation_id"]
-    message = data["message"]
-  response={
-    "message": message,
-    "parent_id": parent_id,
-    "conversation_id": conversation_id
-  }
-  return response
 
 # 对话
 @app.route('/ask', methods=['post'])
@@ -40,19 +22,24 @@ def chatapi():
         resu = {'code': 1, 'msg': '请求内容不能为空'}
         return json.dumps(resu, ensure_ascii=False)
     data = json.loads(requestJson)
-    print(data)
     if ('conversation_id' in data) == False:
-        data['conversation_id']=None
+        data['conversation_id'] = None
     if ('parent_id' in data) == False:
         data['parent_id'] = None
     try:
-        print(data)
-        msg = chat(data['msg'], data['conversation_id'], data['parent_id'])
+        if data['conversation_id'] is None and data['parent_id'] is None:
+            chatbot.reset_chat()
+        for i in chatbot.ask(
+            data['msg'],
+            data['conversation_id'],
+            data['parent_id']
+        ):
+            result = i
     except Exception as error:
         print("接口报错")
         return json.dumps({'code': 1, 'msg': '请求异常: ' + str(error)}, ensure_ascii=False)
     else:
-        return json.dumps({'code': 0, 'data': msg}, ensure_ascii=False)
+        return json.dumps({'code': 0, 'data': result}, ensure_ascii=False)
 
 # 由于逆向工程的接口原因，参数传递都是正确的，但是始终返回的都是所有对话
 @app.route('/conversations', methods=['get'])
